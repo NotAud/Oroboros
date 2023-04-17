@@ -1,15 +1,31 @@
-// Prevents additional console window on Windows in release, DO NOT REMOVE!!
-#![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
+#![cfg_attr(
+    all(not(debug_assertions), target_os = "windows"),
+    windows_subsystem = "windows"
+)]
 
-// Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
-#[tauri::command]
-fn greet(name: &str) -> String {
-    format!("Hello, {}! You've been greeted from Rust!", name)
-}
+use tauri::Manager;
+
+mod app;
+use app::ClickItApp;
+use std::sync::Arc;
 
 fn main() {
+    let ctx = tauri::generate_context!();
+
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![greet])
-        .run(tauri::generate_context!())
+        .setup(|app| {
+            let app_handle = Arc::new(app.app_handle().clone());
+            let app_manager = Box::new(ClickItApp::new(app_handle).run());
+            app.manage(app_manager);
+
+            #[cfg(debug_assertions)]
+            {
+                let main_window = app.get_window("main").unwrap();
+                main_window.open_devtools();
+            }
+
+            Ok(())
+        })
+        .run(ctx)
         .expect("error while running tauri application");
 }
