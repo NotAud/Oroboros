@@ -1,10 +1,10 @@
 use autopilot::mouse;
 use device_query::{DeviceQuery, DeviceState, Keycode};
 use serde_json::json;
-use std::sync::mpsc::{channel, Receiver, Sender};
 use std::{
     sync::{
         atomic::{AtomicBool, AtomicI32, AtomicU32, AtomicU64, Ordering},
+        mpsc::{channel, Receiver, Sender},
         Arc, Mutex,
     },
     thread,
@@ -50,7 +50,7 @@ impl ClickItApp {
         match main_window {
             Some(main_window) => {
                 let window_position = main_window.outer_position();
-                let window_size = main_window.inner_size();
+                let window_size = main_window.outer_size();
                 match (window_position, window_size) {
                     (Ok(window_position), Ok(window_size)) => {
                         let (x, y) = (window_position.x, window_position.y);
@@ -107,22 +107,37 @@ impl ClickItApp {
                 }
             });
 
-        let this = self.clone();
-        thread::spawn(move || loop {
-            if this.is_autoclicking.load(Ordering::Relaxed) && !this.boundary_check() {
-                let _ = mouse::click(mouse::Button::Left, Some(0));
-            }
-            match this.autoclicker_channel {
-                Some((ref _sender, ref receiver)) => {
-                    let receiver = receiver.lock().unwrap();
-                    match receiver
-                        .recv_timeout(Duration::from_millis(this.delay.load(Ordering::Relaxed)))
-                    {
-                        Ok(_) => continue,
-                        Err(_) => continue,
+        thread::spawn({
+            let this = self.clone();
+
+            move || loop {
+                // let is_visible = this
+                //     .app_handle
+                //     .clone()
+                //     .unwrap()
+                //     .get_window("main")
+                //     .unwrap()
+                //     .is_visible();
+                // if is_visible.is_err() {
+                //     panic!("Could not get window visibility")
+                // }
+
+                if this.is_autoclicking.load(Ordering::Relaxed) {
+                    // println!("{:?}", is_visible.unwrap());
+                    if !this.boundary_check() {
+                        let _ = mouse::click(mouse::Button::Left, Some(0));
                     }
                 }
-                None => (),
+
+                let (_, ref receiver) = this.autoclicker_channel.as_ref().unwrap();
+                match receiver
+                    .lock()
+                    .unwrap()
+                    .recv_timeout(Duration::from_millis(this.delay.load(Ordering::Relaxed)))
+                {
+                    Ok(_) => continue,
+                    Err(_) => continue,
+                }
             }
         });
 

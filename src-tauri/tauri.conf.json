@@ -55,7 +55,7 @@
       {
         "title": "Oroboros",
         "fullscreen": false,
-        "resizable": true,
+        "resizable": false,
         "width": 360,
         "height": 100
       }
