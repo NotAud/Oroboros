@@ -1,0 +1,27 @@
+[package]
+name = "autoclicker"
+version = "0.0.0"
+description = "Oroboros"
+authors = ["you"]
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[build-dependencies]
+tauri-build = { version = "1", features = [] }
+
+[dependencies]
+tauri = { version = "1", features = [ "shell-open"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+windows = { version = "0.54.0", features = ["Win32_Foundation", "Win32_UI_WindowsAndMessaging", "Win32_UI_Input_KeyboardAndMouse", "Win32_UI_TextServices", "Win32_System_Threading"] }
+crossbeam-channel = "0.5.12"
+tokio-stream = { version = "0.1.15", features = ["sync"] }
+tokio = { version = "1.37.0", features = ["full"] }
+futures = "0.3.30"
+rdev = "0.5.3"
+indexmap = "2.2.6"
+
+[features]
+# This feature is used for production builds or when a dev server is not specified, DO NOT REMOVE!!
+custom-protocol = ["tauri/custom-protocol"]

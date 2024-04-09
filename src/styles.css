@@ -1,0 +1,25 @@
+/* ./src/index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+html,
+body {
+  @apply bg-zinc-950 text-gray-300;
+}
+
+input {
+  @apply bg-zinc-900 text-gray-300 pl-2 py-1 rounded-[4px];
+}
+
+input:focus {
+  outline: none;
+}
