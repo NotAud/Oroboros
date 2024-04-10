@@ -26,5 +26,3 @@ dist-ssr
 node_modules/
 bun.lockb
 Cargo.lock
-components.d.ts
-auto-imports.d.ts

@@ -11,6 +11,7 @@ use tauri::Manager;
 
 use crate::commands::settings::{
     get_status::get_status, set_hotkey::set_hotkey, set_interval::set_interval,
+    set_is_randomized::set_is_randomized, set_randomized_interval::set_randomized_interval,
     set_window_detection::set_window_detection, set_window_hwnd::set_window_hwnd,
 };
 use crate::commands::util::get_windows::get_windows;
@@ -27,6 +28,9 @@ fn main() {
     let app_state = Arc::new(AppState {
         active: Reactive::new(false, sender.clone()),
         interval: Reactive::new(100, sender.clone()),
+        is_randomized: Reactive::new(false, sender.clone()),
+        randomized_min: Reactive::new(100, sender.clone()),
+        randomized_max: Reactive::new(100, sender.clone()),
         hotkey: Reactive::new(vec![], sender.clone()),
         window_detection: Reactive::new(false, sender.clone()),
         window_hwnd: Reactive::new(0, sender.clone()),
@@ -43,6 +47,8 @@ fn main() {
         .invoke_handler(tauri::generate_handler![
             get_status,
             set_interval,
+            set_is_randomized,
+            set_randomized_interval,
             set_hotkey,
             get_windows,
             set_window_detection,

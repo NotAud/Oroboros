@@ -6,6 +6,9 @@ use std::sync::RwLock;
 pub struct AppState {
     pub active: Reactive<bool>,
     pub interval: Reactive<u64>,
+    pub is_randomized: Reactive<bool>,
+    pub randomized_min: Reactive<u64>,
+    pub randomized_max: Reactive<u64>,
     pub hotkey: Reactive<Vec<Key>>,
     pub window_detection: Reactive<bool>,
     pub window_hwnd: Reactive<isize>,

@@ -52,6 +52,20 @@ export const useSettingStore = defineStore("window", () => {
   );
 
   watch(
+    () => settings.isRandomized,
+    (value) => {
+      invoke("set_is_randomized", { isRandomized: value });
+    }
+  );
+
+  watch(
+    () => [settings.randomizedSpeed.from, settings.randomizedSpeed.to],
+    (value) => {
+      invoke("set_randomized_interval", { min: value[0], max: value[1] });
+    }
+  );
+
+  watch(
     () => settings.hotkey,
     (value) => {
       invoke("set_hotkey", { hotkey: value });

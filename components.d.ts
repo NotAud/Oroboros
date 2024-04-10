@@ -7,7 +7,6 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
-    Greet: typeof import('./src/components/Greet.vue')['default']
     Hotkey: typeof import('./src/components/Settings/Hotkey.vue')['default']
     Interval: typeof import('./src/components/Settings/Interval.vue')['default']
     LabelContainer: typeof import('./src/components/Util/LabelContainer.vue')['default']
