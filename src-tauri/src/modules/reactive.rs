@@ -25,8 +25,8 @@ impl<T: Serialize + Send + Clone> Reactive<T> {
     }
 
     pub fn emit(&self, event: &str) {
-        let value_read = self.value.read().expect("Failed to lock for reading");
-        let serialized_value = serde_json::to_string(&*value_read).unwrap();
+        let value_read = { &*self.value.read().expect("Failed to lock for reading") };
+        let serialized_value = serde_json::to_string(value_read).unwrap();
 
         let _ = self.emitter.send((event.to_string(), serialized_value));
     }

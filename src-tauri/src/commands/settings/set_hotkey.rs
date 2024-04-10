@@ -9,7 +9,6 @@ pub fn set_hotkey(hotkey: Vec<String>, state: tauri::State<'_, Arc<AppState>>) {
         parsed_hotkey.push(Key::from(key));
     }
 
-    let state = Arc::clone(&state);
     let mut hotkey_write = state.hotkey.value.write().unwrap();
     *hotkey_write = parsed_hotkey;
     drop(hotkey_write);

@@ -37,15 +37,14 @@ impl HotkeyListener {
 
                 self.pressed_keys.insert(Key::from(key));
 
-                let hotkey = self.state.hotkey.value.read().unwrap();
-                if self.match_hotkey(&hotkey) {
-                    drop(hotkey);
-
+                let hotkey = { &*self.state.hotkey.value.read().unwrap() };
+                if self.match_hotkey(hotkey) {
                     self.hotkey_active = true;
 
-                    let mut active = self.state.active.value.write().unwrap();
-                    *active = !*active;
-                    drop(active);
+                    {
+                        let mut active = self.state.active.value.write().unwrap();
+                        *active = !*active;
+                    }
 
                     self.state.active.emit("autoclicker_status");
                 }

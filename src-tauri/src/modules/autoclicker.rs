@@ -9,20 +9,23 @@ pub fn create_autoclicker(state: Arc<AppState>) {
         let mut now = Instant::now();
 
         loop {
-            {
-                if state.active.value.read().unwrap().clone() {
-                    let current_time = Duration::from_millis(*state.interval.value.read().unwrap());
-                    if now.elapsed() >= current_time {
-                        // println!("Click!");
-                        let _ = rdev::simulate(&rdev::EventType::ButtonPress(rdev::Button::Left));
-                        let _ = rdev::simulate(&rdev::EventType::ButtonRelease(rdev::Button::Left));
+            let active = { *state.active.value.read().unwrap() };
+            if active {
+                let interval = { *state.interval.value.read().unwrap() };
+                let current_time = Duration::from_millis(interval);
 
-                        now = Instant::now();
-                    }
+                if now.elapsed() >= current_time {
+                    println!("Click!");
+                    // let _ = rdev::simulate(&rdev::EventType::ButtonPress(rdev::Button::Left));
+                    // let _ = rdev::simulate(&rdev::EventType::ButtonRelease(rdev::Button::Left));
+
+                    now = Instant::now();
                 }
-            }
 
-            std::thread::sleep(Duration::from_millis(5));
+                std::thread::sleep(Duration::from_millis(1));
+            } else {
+                std::thread::sleep(Duration::from_millis(100));
+            }
         }
     });
 }
