@@ -20,8 +20,8 @@
     "windows": [
       {
         "title": "Oroboros",
-        "width": 800,
-        "height": 600,
+        "width": 500,
+        "height": 440,
         "resizable": false
       }
     ],

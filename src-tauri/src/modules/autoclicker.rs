@@ -27,9 +27,8 @@ pub fn create_autoclicker(state: Arc<AppState>) {
                 let current_time = Duration::from_millis(current_interval);
 
                 if now.elapsed() >= current_time {
-                    println!("Click! {}", current_interval);
-                    // let _ = rdev::simulate(&rdev::EventType::ButtonPress(rdev::Button::Left));
-                    // let _ = rdev::simulate(&rdev::EventType::ButtonRelease(rdev::Button::Left));
+                    let _ = rdev::simulate(&rdev::EventType::ButtonPress(rdev::Button::Left));
+                    let _ = rdev::simulate(&rdev::EventType::ButtonRelease(rdev::Button::Left));
 
                     now = Instant::now();
                     current_interval = 0;
