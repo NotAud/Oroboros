@@ -24,5 +24,7 @@ dist-ssr
 *.sw?
 
 node_modules/
-bun_lockb
+bun.lockb
 Cargo.lock
+components.d.ts
+auto-imports.d.ts
