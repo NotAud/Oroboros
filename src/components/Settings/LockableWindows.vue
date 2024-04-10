@@ -36,19 +36,20 @@ async function set_window(windowInfo: [number, string]) {
       v-if="settingsStore.settings.windowDetection"
       class="flex items-center gap-x-4"
     >
-      <div class="flex items-end h-full relative">
+      <div class="flex h-full relative">
         <button
-          class="border border-white rounded-md bg-zinc-800/5 py-0.5 hover:bg-zinc-900/80 transition-all w-[200px] whitespace-nowrap text-ellipsis overflow-x-hidden"
+          class="rounded-md bg-white/5 py-0.5 hover:bg-white/10 transition-all shd w-[200px] whitespace-nowrap text-ellipsis overflow-x-hidden"
+          :class="isOpen ? 'bg-white/10' : ''"
           @click="isOpen = !isOpen"
         >
           {{ displayName }}
         </button>
         <div
           v-if="isOpen"
-          class="flex flex-col bg-zinc-900 overflow-x-hidden max-h-[300px] max-w-full rounded-[4px] overflow-y-auto absolute top-[calc(100%+5px)] left-0 z-10 shadow-md transition-all"
+          class="flex flex-col bg-white/5 overflow-x-hidden max-h-[200px] max-w-full rounded-[4px] overflow-y-auto absolute top-[calc(100%+5px)] left-0 z-10 shadow-md transition-all"
         >
           <button
-            class="px-2 py-1.5 flex-none text-start hover:bg-zinc-950/40 transition-all whitespace-nowrap text-ellipsis overflow-x-hidden"
+            class="px-2 py-1.5 flex-none text-start hover:bg-white/5 transition-all whitespace-nowrap text-ellipsis overflow-x-hidden"
             v-for="(window, $i) in settingsStore.settings.lockableWindows"
             :key="$i"
             @click="set_window(window)"
@@ -61,25 +62,4 @@ async function set_window(windowInfo: [number, string]) {
   </div>
 </template>
 
-<style scoped>
-/* width */
-::-webkit-scrollbar {
-  width: 5px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  @apply rounded-full;
-  background: #888;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
-</style>
+<style scoped></style>
