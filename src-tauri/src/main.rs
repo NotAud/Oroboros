@@ -27,10 +27,10 @@ fn main() {
     // Possibly remove sender/reactive from values where emitting is not needed
     let app_state = Arc::new(AppState {
         active: Reactive::new(false, sender.clone()),
-        interval: Reactive::new(100, sender.clone()),
+        interval: Reactive::new(1000, sender.clone()),
         is_randomized: Reactive::new(false, sender.clone()),
-        randomized_min: Reactive::new(100, sender.clone()),
-        randomized_max: Reactive::new(100, sender.clone()),
+        randomized_min: Reactive::new(1000, sender.clone()),
+        randomized_max: Reactive::new(1000, sender.clone()),
         hotkey: Reactive::new(vec![], sender.clone()),
         window_detection: Reactive::new(false, sender.clone()),
         window_hwnd: Reactive::new(0, sender.clone()),
