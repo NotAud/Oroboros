@@ -15,11 +15,7 @@ const displayName = computed(() => {
 function parseName(name: string) {
   const combined = name.split(" - ");
   const last = combined[combined.length - 1];
-  if (!last.includes(" ")) {
-    return last;
-  }
-
-  return name;
+  return last;
 }
 
 async function set_window(windowInfo: [number, string]) {

@@ -11,43 +11,59 @@ const model = defineModel({ required: true, type: Boolean });
 
 <style scoped>
 .switch {
-  @apply h-7 relative inline-block;
-  width: 4.5em;
+  --secondary-container: #3a4b39;
+  --primary: #84da89;
+  font-size: 17px;
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 20px;
 }
 
 .switch input {
-  @apply w-0 h-0 opacity-0;
+  display: none;
+  opacity: 0;
+  width: 0;
+  height: 0;
 }
 
 .slider {
-  @apply bg-zinc-900 absolute cursor-pointer top-0 left-0 right-0 bottom-0;
-  box-shadow: inset -1px 1px 4px 2px rgba(0, 0, 0, 0.8);
-  transition: 0.4s;
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #313033;
+  transition: 0.2s;
   border-radius: 30px;
 }
 
 .slider:before {
   position: absolute;
   content: "";
-  height: 1.1em;
-  width: 1.1em;
+  height: 15px;
+  width: 15px;
   border-radius: 20px;
-  left: 0.3em;
-  bottom: 0.3em;
-  background-color: rgb(255, 255, 255);
+  left: 3px;
+  bottom: 3px;
+  background-color: #aeaaae;
   transition: 0.4s;
 }
 
-.switch input:checked + .slider {
-  @apply bg-green-500;
-  box-shadow: inset 2px 2px 4px 2px rgba(0, 0, 0, 0.8);
+input:checked + .slider::before {
+  background-color: var(--primary);
 }
 
-/* .switch input:focus + .slider {
-  box-shadow: inset -2px 2px 5px 1px rgba(0, 0, 0, 0.8);
-} */
+input:checked + .slider {
+  background-color: var(--secondary-container);
+}
 
-.switch input:checked + .slider:before {
-  transform: translateX(2.5em);
+input:focus + .slider {
+  box-shadow: 0 0 1px var(--secondary-container);
+}
+
+input:checked + .slider:before {
+  transform: translateX(38px);
 }
 </style>

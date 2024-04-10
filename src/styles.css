@@ -13,13 +13,23 @@
 
 html,
 body {
-  @apply bg-zinc-950 text-gray-300;
+  @apply bg-background text-gray-300 h-full overflow-hidden;
+}
+
+#app {
+  @apply h-full;
 }
 
 input {
-  @apply bg-zinc-900 text-gray-300 pl-2 py-1 rounded-[4px];
+  @apply bg-white/5 text-gray-300 pl-2 py-1 rounded-[4px];
 }
 
 input:focus {
   outline: none;
+}
+
+.shd {
+  box-shadow: 0 1px 1px hsl(0deg 0% 0% / 0.075),
+    0 2px 2px hsl(0deg 0% 0% / 0.075), 0 4px 4px hsl(0deg 0% 0% / 0.075),
+    0 8px 8px hsl(0deg 0% 0% / 0.075), 0 16px 16px hsl(0deg 0% 0% / 0.075);
 }

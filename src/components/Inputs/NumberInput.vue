@@ -56,7 +56,7 @@ async function getValue(e: KeyboardEvent) {
 </script>
 
 <template>
-  <input :value="model" type="text" @keydown="updateValue" />
+  <input :value="model" type="text" @keydown="updateValue" class="shd" />
 </template>
 
 <style scoped></style>

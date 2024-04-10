@@ -9,7 +9,7 @@ defineProps<Props>();
 <template>
   <div class="flex flex-col w-full h-full">
     <span class="pl-1 select-none">{{ title }}</span>
-    <div class="border border-zinc-800 rounded-md p-2">
+    <div class="bg-white/5 shd rounded-md p-2">
       <slot></slot>
     </div>
   </div>

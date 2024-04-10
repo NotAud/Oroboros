@@ -1,10 +1,4 @@
-<script setup lang="ts">
-import { invoke } from "@tauri-apps/api/tauri";
-async function test() {
-  let list = await invoke<string[]>("window_handles");
-  console.log(list);
-}
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <div class="flex flex-col w-full h-full p-4 gap-y-4">
@@ -13,9 +7,10 @@ async function test() {
       <Hotkey />
     </div>
     <SectionContainer title="Settings">
-      <button @click="test">Test</button>
-      <Interval />
-      <LockableWindows />
+      <div class="flex flex-col gap-y-6">
+        <Interval />
+        <LockableWindows />
+      </div>
     </SectionContainer>
   </div>
 </template>

@@ -23,7 +23,7 @@ function minGuard(num: number) {
 </script>
 
 <template>
-  <div class="flex gap-x-6">
+  <div class="flex gap-x-6 items-center">
     <LabelContainer title="Randomize">
       <SwitchInput v-model="settingsStore.settings.isRandomized" />
     </LabelContainer>
