@@ -1,11 +1,11 @@
 {
-  "version": "1.2.0",
+  "version": "1.3.0",
   "notes": "Improvment to Window Detection and Add Updater",
   "pub_date": "2024-04-12T20:52:46.943Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTTUNpNTdiRUNBZFFDeEZzenRtWmJyNDBzSzg4NmYwM01TbXdBdXZ4aG16K3NWa0w1SnpXSDVhWm9acUZSSDNGVjMyV2VzeDJKeHQvbXhWTWYyVFZsVWIzdEZqYmhlOXc0PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzEyOTU0NzI0CWZpbGU6T3JvYm9yb3MgQXV0byBDbGlja2VyXzEuMi4wX3g2NC1zZXR1cC5uc2lzLnppcApXZUhDMUQwZEhoM2U5L09Qb0taUjZ2eDY3S3J5RWpZcXZsTFVSRVl5aVNraEhqeFZTcEowdlF4d2VUR1FzdERKdU5jK0RsczFoTlM2TGxwOVV2a1hBQT09Cg==",
-      "url": "https://github.com/NotAud/Oroboros/releases/download/v1.2.0/Oroboros.Auto.Clicker_1.2.0_x64-setup.nsis.zip"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTTUNpNTdiRUNBZGUrRjdNUmk3aWN3TkJSQW01OVJFK3EwWTgyZWtrMVdWVFUzRmlPUzJxT0tNbXZhRHpHY3F1Y2JLaWkwaHMwT1JQNmJMWnNLM2ludGVVR3J2dTErclFFPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzEyOTY1MzMxCWZpbGU6T3JvYm9yb3MgQXV0byBDbGlja2VyXzEuMy4wX3g2NC1zZXR1cC5uc2lzLnppcApQd1lIc1h2ZW5OV1RLYmFDNUozS1dZTVdXOFk0UVlyeWM0TGVCVWtZQ3BVT0JSdGk3ZGhXVFllcld1TTUxQUdqeW01a1pHaHBLOEg4enRkRXpKNGFEQT09Cg==",
+      "url": "https://github.com/NotAud/Oroboros/releases/download/v1.3.0/Oroboros.Auto.Clicker_1.3.0_x64-setup.nsis.zip"
     }
   }
 }
