@@ -36,7 +36,7 @@ function minGuard(num: number) {
         aria-disabled="true"
       />
     </LabelContainer>
-    <template v-else>
+    <div class="flex gap-x-2" v-else>
       <LabelContainer title="From (ms)">
         <NumberInput
           v-model="settingsStore.settings.randomizedSpeed.from"
@@ -51,7 +51,7 @@ function minGuard(num: number) {
           aria-disabled="true"
         />
       </LabelContainer>
-    </template>
+    </div>
   </div>
 </template>
 

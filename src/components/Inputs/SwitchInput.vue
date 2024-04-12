@@ -3,7 +3,7 @@ const model = defineModel({ required: true, type: Boolean });
 </script>
 
 <template>
-  <label class="switch">
+  <label class="switch shrink-0">
     <input v-model="model" type="checkbox" />
     <span class="slider"></span>
   </label>
