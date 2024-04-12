@@ -23,6 +23,8 @@ pub fn create_autoclicker(state: Arc<AppState>) {
                         }
 
                         state.active.emit("autoclicker_status");
+
+                        std::thread::sleep(Duration::from_millis(1));
                         continue;
                     }
                 }

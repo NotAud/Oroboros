@@ -1,62 +1,63 @@
 <script setup lang="ts">
 type Props = {
-  rangeGuard?: (num: number) => number;
+  customGuard?: (num: number) => number;
 };
 
 const props = defineProps<Props>();
 
-const model = defineModel({ required: true, type: Number });
+const internalInput = defineModel({ required: true, type: Number });
 
-async function updateValue(e: KeyboardEvent) {
+function inputGuard(e: KeyboardEvent) {
   e.preventDefault();
-
-  const updatedValue = await getValue(e);
-  if (!updatedValue) {
+  const inputElement = e.target as HTMLInputElement;
+  if (!inputElement || (isNaN(Number(e.key)) && e.key !== "Backspace")) {
     return;
   }
 
-  if (props.rangeGuard) {
-    model.value = props.rangeGuard(updatedValue);
-  } else {
-    model.value = updatedValue;
-  }
-}
+  let newValue;
+  const start = inputElement.selectionStart;
+  const end = inputElement.selectionEnd;
 
-async function getValue(e: KeyboardEvent) {
-  e.preventDefault();
-
-  if (e.key === "Enter") {
-    (e.target as HTMLInputElement).blur();
-    return null;
-  }
-
-  const value = (e.target as HTMLInputElement).value;
-
-  if (e.key === "Backspace") {
-    const newValue = parseInt(value.slice(0, -1));
-    if (isNaN(newValue) || newValue < 0) {
-      return 0;
+  if (start !== end) {
+    if (e.key === "Backspace") {
+      newValue =
+        inputElement.value.substring(0, start as number) +
+        inputElement.value.substring(end as number);
+    } else {
+      newValue =
+        inputElement.value.substring(0, start as number) +
+        e.key +
+        inputElement.value.substring(end as number);
     }
-
-    return newValue;
+  } else {
+    if (e.key === "Backspace") {
+      newValue = inputElement.value.substring(0, inputElement.value.length - 1);
+    } else {
+      newValue = inputElement.value + e.key;
+    }
   }
 
-  if (isNaN(parseInt(e.key))) return;
-  if (model.value === 0) {
-    return parseInt(e.key);
-  }
-
-  const newValue = value + e.key;
-  if (newValue.length > 6) {
-    return null;
-  }
-
-  return parseInt(newValue);
+  const newValueAsNumber = isNaN(Number(newValue)) ? 1 : Number(newValue);
+  const rangedValue = Math.min(Math.max(newValueAsNumber, 1), 9999);
+  internalInput.value = props.customGuard
+    ? props.customGuard(rangedValue)
+    : rangedValue;
 }
 </script>
 
 <template>
-  <input :value="model" type="text" @keydown="updateValue" class="shd" />
+  <input
+    v-model="internalInput"
+    type="text"
+    class="shd w-24"
+    @keydown="inputGuard"
+  />
 </template>
 
-<style scoped></style>
+<style scoped>
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+</style>

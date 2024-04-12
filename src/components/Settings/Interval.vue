@@ -40,14 +40,14 @@ function minGuard(num: number) {
       <LabelContainer title="From (ms)">
         <NumberInput
           v-model="settingsStore.settings.randomizedSpeed.from"
-          :rangeGuard="maxGuard"
+          :customGuard="maxGuard"
           aria-disabled="true"
         />
       </LabelContainer>
       <LabelContainer title="To (ms)">
         <NumberInput
           v-model="settingsStore.settings.randomizedSpeed.to"
-          :rangeGuard="minGuard"
+          :customGuard="minGuard"
           aria-disabled="true"
         />
       </LabelContainer>
