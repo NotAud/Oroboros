@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div class="flex flex-col w-full h-full p-4 gap-y-6">
+  <div class="flex flex-col w-full h-full p-4 gap-y-4">
     <div class="flex justify-between">
       <Status />
       <Hotkey />
@@ -18,6 +18,9 @@
           <ClickOptions />
         </SectionContainer>
       </div>
+      <SectionContainer title="Click Repeat" class="w-full">
+        <ClickRepeat />
+      </SectionContainer>
     </div>
   </div>
 </template>

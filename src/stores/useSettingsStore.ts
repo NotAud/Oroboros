@@ -13,6 +13,8 @@ type Settings = {
     to: number;
   };
   clickType: 0 | 1;
+  clickRepeater: string;
+  repeatAmount: number;
   hotkey: string[];
   windowDetection: boolean;
   windowInfo: window;
@@ -29,6 +31,8 @@ export const useSettingStore = defineStore("window", () => {
       to: 1000,
     },
     clickType: 0,
+    clickRepeater: "infinite",
+    repeatAmount: 1,
     hotkey: [],
     windowDetection: false,
     windowInfo: [0, ""],
@@ -71,6 +75,21 @@ export const useSettingStore = defineStore("window", () => {
     () => settings.clickType,
     (value) => {
       invoke("set_click_type", { clickType: value });
+    }
+  );
+
+  watch(
+    () => settings.clickRepeater,
+    (value) => {
+      const clickRepeater = value === "infinite" ? false : true;
+      invoke("set_click_repeater", { clickRepeater: clickRepeater });
+    }
+  );
+
+  watch(
+    () => settings.repeatAmount,
+    (value) => {
+      invoke("set_repeat_amount", { repeatAmount: value });
     }
   );
 

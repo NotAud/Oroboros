@@ -7,7 +7,7 @@
   },
   "package": {
     "productName": "Oroboros Auto Clicker",
-    "version": "1.2.0"
+    "version": "1.3.0"
   },
   "tauri": {
     "allowlist": {
@@ -21,7 +21,7 @@
       {
         "title": "Oroboros",
         "width": 500,
-        "height": 440,
+        "height": 420,
         "resizable": false
       }
     ],

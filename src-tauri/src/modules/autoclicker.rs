@@ -12,6 +12,7 @@ pub fn create_autoclicker(state: Arc<AppState>) {
         let mut now = Instant::now();
         let mut rng = thread_rng();
         let mut current_interval: u64 = 0;
+
         loop {
             let active = { *state.active.value.read().unwrap() };
             if active {
@@ -51,8 +52,6 @@ pub fn create_autoclicker(state: Arc<AppState>) {
                         }
 
                         state.active.emit("autoclicker_status");
-
-                        std::thread::sleep(Duration::from_millis(1));
                         continue;
                     }
                 }
@@ -71,6 +70,23 @@ pub fn create_autoclicker(state: Arc<AppState>) {
                 let current_time = Duration::from_millis(current_interval);
 
                 if now.elapsed() >= current_time {
+                    let click_repeater = { *state.click_repeater.read().unwrap() };
+                    if click_repeater {
+                        let repeat_amount = { *state.repeat_amount.read().unwrap() };
+                        let click_counter = { *state.click_counter.read().unwrap() };
+                        if click_counter >= repeat_amount {
+                            {
+                                *state.active.value.write().unwrap() = false;
+                                *state.click_counter.write().unwrap() = 0;
+                            }
+
+                            state.active.emit("autoclicker_status");
+                            continue;
+                        }
+
+                        *state.click_counter.write().unwrap() += 1;
+                    }
+
                     let click_type = { *state.click_type.read().unwrap() };
                     let _ = rdev::simulate(&rdev::EventType::ButtonPress(rdev::Button::Left));
                     let _ = rdev::simulate(&rdev::EventType::ButtonRelease(rdev::Button::Left));

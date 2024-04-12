@@ -45,6 +45,7 @@ impl HotkeyListener {
                         let mut active = self.state.active.value.write().unwrap();
                         *active = !*active;
                     }
+                    *self.state.click_counter.write().unwrap() = 0;
 
                     self.state.active.emit("autoclicker_status");
                 }
