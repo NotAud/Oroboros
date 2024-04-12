@@ -10,6 +10,8 @@
     * Interval and Randomized Intervals
     * Window Detection - Stops the autoclicker when the foreground window changes
 
+### Preview
+
 <p align="center">
   <img src="app-preview.png" width="350" alt="preview image">
 </p>
