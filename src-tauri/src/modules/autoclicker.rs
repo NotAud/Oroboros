@@ -4,7 +4,8 @@ use std::{
     sync::Arc,
     time::{Duration, Instant},
 };
-use windows::Win32::UI::WindowsAndMessaging::GetForegroundWindow;
+use windows::Win32::Foundation::{POINT, RECT};
+use windows::Win32::UI::WindowsAndMessaging::{GetCursorPos, GetForegroundWindow, GetWindowRect};
 
 pub fn create_autoclicker(state: Arc<AppState>) {
     std::thread::spawn(move || {
@@ -18,6 +19,33 @@ pub fn create_autoclicker(state: Arc<AppState>) {
                 if window_lock {
                     let window_hwnd = { *state.window_hwnd.read().unwrap() };
                     if window_hwnd != unsafe { GetForegroundWindow() } {
+                        {
+                            *state.active.value.write().unwrap() = false;
+                        }
+
+                        state.active.emit("autoclicker_status");
+
+                        std::thread::sleep(Duration::from_millis(1));
+                        continue;
+                    }
+
+                    let point = unsafe {
+                        let mut point = POINT::default();
+                        GetCursorPos(&mut point).unwrap();
+                        point
+                    };
+
+                    let rect = unsafe {
+                        let mut rect = RECT::default();
+                        GetWindowRect(window_hwnd, &mut rect).unwrap();
+                        rect
+                    };
+
+                    if point.x < rect.left
+                        || point.x > rect.right
+                        || point.y < rect.top
+                        || point.y > rect.bottom
+                    {
                         {
                             *state.active.value.write().unwrap() = false;
                         }
