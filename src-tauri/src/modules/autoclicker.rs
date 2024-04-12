@@ -4,6 +4,7 @@ use std::{
     sync::Arc,
     time::{Duration, Instant},
 };
+use windows::Win32::UI::WindowsAndMessaging::GetForegroundWindow;
 
 pub fn create_autoclicker(state: Arc<AppState>) {
     std::thread::spawn(move || {
@@ -13,6 +14,19 @@ pub fn create_autoclicker(state: Arc<AppState>) {
         loop {
             let active = { *state.active.value.read().unwrap() };
             if active {
+                let window_lock = { *state.window_detection.value.read().unwrap() };
+                if window_lock {
+                    let window_hwnd = { *state.window_hwnd.read().unwrap() };
+                    if window_hwnd != unsafe { GetForegroundWindow() } {
+                        {
+                            *state.active.value.write().unwrap() = false;
+                        }
+
+                        state.active.emit("autoclicker_status");
+                        continue;
+                    }
+                }
+
                 let is_randomized = { *state.is_randomized.value.read().unwrap() };
                 if current_interval == 0 {
                     if is_randomized {

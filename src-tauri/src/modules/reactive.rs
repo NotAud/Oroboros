@@ -2,6 +2,7 @@ use serde::Serialize;
 use serde::Serializer;
 use std::sync::mpsc::Sender;
 use std::sync::RwLock;
+use windows::Win32::Foundation::HWND;
 
 pub struct AppState {
     pub active: Reactive<bool>,
@@ -11,7 +12,7 @@ pub struct AppState {
     pub randomized_max: Reactive<u64>,
     pub hotkey: Reactive<Vec<Key>>,
     pub window_detection: Reactive<bool>,
-    pub window_hwnd: Reactive<isize>,
+    pub window_hwnd: RwLock<HWND>,
 }
 
 pub struct Reactive<T> {

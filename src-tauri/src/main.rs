@@ -4,7 +4,7 @@
 mod commands;
 mod modules;
 
-use std::sync::Arc;
+use std::sync::{Arc, RwLock};
 
 use modules::autoclicker::create_autoclicker;
 use tauri::Manager;
@@ -18,8 +18,8 @@ use crate::commands::util::get_windows::get_windows;
 use crate::modules::hotkeys::HotkeyListener;
 use crate::modules::reactive::{AppState, Reactive};
 use crate::modules::state_broadcaster::create_broadcaster;
-use crate::modules::window_watcher::WindowWatcher;
 use std::sync::mpsc;
+use windows::Win32::Foundation::HWND;
 
 fn main() {
     let (sender, receiver) = mpsc::channel();
@@ -33,14 +33,11 @@ fn main() {
         randomized_max: Reactive::new(1000, sender.clone()),
         hotkey: Reactive::new(vec![], sender.clone()),
         window_detection: Reactive::new(false, sender.clone()),
-        window_hwnd: Reactive::new(0, sender.clone()),
+        window_hwnd: RwLock::new(HWND(0)),
     });
 
     let hotkey_listener = HotkeyListener::new(Arc::clone(&app_state));
     hotkey_listener.start();
-
-    let window_watcher = WindowWatcher::new(Arc::clone(&app_state));
-    window_watcher.start();
 
     let tauri_app = tauri::Builder::default()
         .manage(app_state.clone())
