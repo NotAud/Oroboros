@@ -41,6 +41,14 @@
         "icons/icon.icns",
         "icons/icon.ico"
       ]
+    },
+    "updater": {
+      "active": true,
+      "endpoints": [
+        "https://github.com/NotAud/Oroboros/blob/master/version.json"
+      ],
+      "dialog": true,
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDc1ODA0MDZDN0IyRTBBOEMKUldTTUNpNTdiRUNBZGJOV293cjhVRkxmSEdiWXQzZ0JlM2lFdUprMndVVUxtRjU0V3k5ME96U3MK"
     }
   }
 }
