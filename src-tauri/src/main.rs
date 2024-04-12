@@ -10,9 +10,10 @@ use modules::autoclicker::create_autoclicker;
 use tauri::Manager;
 
 use crate::commands::settings::{
-    get_status::get_status, set_hotkey::set_hotkey, set_interval::set_interval,
-    set_is_randomized::set_is_randomized, set_randomized_interval::set_randomized_interval,
-    set_window_detection::set_window_detection, set_window_hwnd::set_window_hwnd,
+    get_status::get_status, set_click_type::set_click_type, set_hotkey::set_hotkey,
+    set_interval::set_interval, set_is_randomized::set_is_randomized,
+    set_randomized_interval::set_randomized_interval, set_window_detection::set_window_detection,
+    set_window_hwnd::set_window_hwnd,
 };
 use crate::commands::util::get_windows::get_windows;
 use crate::modules::hotkeys::HotkeyListener;
@@ -31,6 +32,7 @@ fn main() {
         is_randomized: Reactive::new(false, sender.clone()),
         randomized_min: Reactive::new(1000, sender.clone()),
         randomized_max: Reactive::new(1000, sender.clone()),
+        click_type: RwLock::new(0),
         hotkey: Reactive::new(vec![], sender.clone()),
         window_detection: Reactive::new(false, sender.clone()),
         window_hwnd: RwLock::new(HWND(0)),
@@ -46,6 +48,7 @@ fn main() {
             set_interval,
             set_is_randomized,
             set_randomized_interval,
+            set_click_type,
             set_hotkey,
             get_windows,
             set_window_detection,

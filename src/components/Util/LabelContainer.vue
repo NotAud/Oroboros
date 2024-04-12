@@ -7,7 +7,7 @@ defineProps<Props>();
 </script>
 
 <template>
-  <div class="flex flex-col select-none w-fit">
+  <div class="flex flex-col select-none">
     <slot></slot>
     <label class="text-[10px] pl-1">{{ title }}</label>
   </div>

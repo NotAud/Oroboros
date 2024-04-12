@@ -10,6 +10,7 @@ pub struct AppState {
     pub is_randomized: Reactive<bool>,
     pub randomized_min: Reactive<u64>,
     pub randomized_max: Reactive<u64>,
+    pub click_type: RwLock<i8>,
     pub hotkey: Reactive<Vec<Key>>,
     pub window_detection: Reactive<bool>,
     pub window_hwnd: RwLock<HWND>,

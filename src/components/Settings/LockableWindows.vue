@@ -19,14 +19,16 @@ function parseName(name: string) {
   return last;
 }
 
-async function set_window(windowInfo: [number, string]) {
+async function setWindow(windowInfo: [number, string]) {
   isOpen.value = false;
   settingsStore.settings.windowInfo = windowInfo;
 }
 
 function clickOutside(e: MouseEvent) {
-  if (e.target.contains(windowDetectionElement.value as Node)) {
-    console.log("click outside");
+  if (
+    (e.target as HTMLElement).contains(windowDetectionElement.value as Node)
+  ) {
+    isOpen.value = false;
   }
 }
 
@@ -36,7 +38,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="flex items-center gap-x-4 relative w-[250px] h-[30px]">
+  <div class="flex items-center gap-x-4 relative w-[250px]">
     <SwitchInput
       v-model="settingsStore.settings.windowDetection"
       @click="settingsStore.populateLockableWindows"
@@ -62,7 +64,7 @@ onMounted(() => {
             class="px-2 py-1.5 flex-none text-start bg-white/5 hover:bg-white/10 transition-all whitespace-nowrap text-ellipsis overflow-x-hidden"
             v-for="(window, $i) in settingsStore.settings.lockableWindows"
             :key="$i"
-            @click="set_window(window)"
+            @click="setWindow(window)"
           >
             {{ parseName(window[1]) }}
           </button>

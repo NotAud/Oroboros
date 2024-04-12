@@ -12,6 +12,7 @@ type Settings = {
     from: number;
     to: number;
   };
+  clickType: 0 | 1;
   hotkey: string[];
   windowDetection: boolean;
   windowInfo: window;
@@ -27,6 +28,7 @@ export const useSettingStore = defineStore("window", () => {
       from: 1000,
       to: 1000,
     },
+    clickType: 0,
     hotkey: [],
     windowDetection: false,
     windowInfo: [0, ""],
@@ -62,6 +64,13 @@ export const useSettingStore = defineStore("window", () => {
     () => [settings.randomizedSpeed.from, settings.randomizedSpeed.to],
     (value) => {
       invoke("set_randomized_interval", { min: value[0], max: value[1] });
+    }
+  );
+
+  watch(
+    () => settings.clickType,
+    (value) => {
+      invoke("set_click_type", { clickType: value });
     }
   );
 

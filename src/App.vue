@@ -10,9 +10,14 @@
       <SectionContainer title="Interval Options">
         <Interval />
       </SectionContainer>
-      <SectionContainer title="Window Detection" class="w-fit">
-        <LockableWindows />
-      </SectionContainer>
+      <div class="flex gap-x-3 h-full">
+        <SectionContainer title="Window Detection">
+          <LockableWindows />
+        </SectionContainer>
+        <SectionContainer title="Click Options" class="w-full">
+          <ClickOptions />
+        </SectionContainer>
+      </div>
     </div>
   </div>
 </template>

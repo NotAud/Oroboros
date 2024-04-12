@@ -11,7 +11,9 @@ defineProps<Props>();
     <div class="absolute left-2 top-2">
       <span class="select-none">{{ title }}</span>
     </div>
-    <div class="bg-white/5 shd rounded-md px-3 pb-2 pt-10">
+    <div
+      class="flex items-center bg-white/5 shd rounded-md px-3 pb-2 pt-10 h-full"
+    >
       <slot></slot>
     </div>
   </div>
