@@ -45,7 +45,7 @@
     "updater": {
       "active": true,
       "endpoints": [
-        "https://gist.githubusercontent.com/NotAud/3e88a079e9f787cc4dfd214f7c6a3ba7/raw/452771517c7903a1b89742fad5f9dcfece648550/oroboros_version_1_3_0.json"
+        "https://gist.githubusercontent.com/NotAud/3e88a079e9f787cc4dfd214f7c6a3ba7/raw/5d19268c2add191770c9d3b7cb7158f563d5a9cd/oroboros_version.json"
       ],
       "dialog": true,
       "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDc1ODA0MDZDN0IyRTBBOEMKUldTTUNpNTdiRUNBZGJOV293cjhVRkxmSEdiWXQzZ0JlM2lFdUprMndVVUxtRjU0V3k5ME96U3MK"
