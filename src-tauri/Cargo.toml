@@ -1,6 +1,6 @@
 [package]
 name = "autoclicker"
-version = "1.3.0"
+version = "1.3.2"
 description = "Oroboros"
 authors = ["you"]
 edition = "2021"
