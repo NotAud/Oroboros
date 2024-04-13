@@ -41,10 +41,10 @@ fn main() {
         window_hwnd: RwLock::new(HWND(0)),
     });
 
-    let hotkey_listener = HotkeyListener::new(Arc::clone(&app_state));
-    hotkey_listener.start();
+    HotkeyListener::new(Arc::clone(&app_state)).start();
+    create_autoclicker(Arc::clone(&app_state));
 
-    let tauri_app = tauri::Builder::default()
+    tauri::Builder::default()
         .manage(app_state.clone())
         .invoke_handler(tauri::generate_handler![
             get_status,
@@ -58,11 +58,7 @@ fn main() {
             get_windows,
             set_window_detection,
             set_window_hwnd
-        ]);
-
-    create_autoclicker(Arc::clone(&app_state));
-
-    tauri_app
+        ])
         .setup(move |app| {
             let handle = app.app_handle();
             create_broadcaster(receiver, handle);
