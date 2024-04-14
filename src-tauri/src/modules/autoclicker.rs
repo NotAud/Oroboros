@@ -12,6 +12,7 @@ pub fn create_autoclicker(state: Arc<AppState>) {
         let mut now = Instant::now();
         let mut rng = thread_rng();
         let mut current_interval: u64 = 0;
+        let mut button_is_held = false;
 
         loop {
             let active = { *state.active.value.read().unwrap() };
@@ -88,12 +89,24 @@ pub fn create_autoclicker(state: Arc<AppState>) {
                     }
 
                     let click_type = { *state.click_type.read().unwrap() };
-                    let _ = rdev::simulate(&rdev::EventType::ButtonPress(rdev::Button::Left));
-                    let _ = rdev::simulate(&rdev::EventType::ButtonRelease(rdev::Button::Left));
+                    // Single Press
+                    if click_type == 0 {
+                        let _ = rdev::simulate(&rdev::EventType::ButtonPress(rdev::Button::Left));
+                        let _ = rdev::simulate(&rdev::EventType::ButtonRelease(rdev::Button::Left));
+                    }
 
+                    // Double Press
                     if click_type == 1 {
                         let _ = rdev::simulate(&rdev::EventType::ButtonPress(rdev::Button::Left));
                         let _ = rdev::simulate(&rdev::EventType::ButtonRelease(rdev::Button::Left));
+
+                        let _ = rdev::simulate(&rdev::EventType::ButtonPress(rdev::Button::Left));
+                        let _ = rdev::simulate(&rdev::EventType::ButtonRelease(rdev::Button::Left));
+                    }
+
+                    if click_type == 2 {
+                        let _ = rdev::simulate(&rdev::EventType::ButtonPress(rdev::Button::Left));
+                        button_is_held = true;
                     }
 
                     now = Instant::now();
@@ -103,6 +116,11 @@ pub fn create_autoclicker(state: Arc<AppState>) {
 
                 std::thread::sleep(Duration::from_millis(1));
             } else {
+                if button_is_held {
+                    let _ = rdev::simulate(&rdev::EventType::ButtonRelease(rdev::Button::Left));
+                    button_is_held = false;
+                }
+
                 std::thread::sleep(Duration::from_millis(100));
             }
         }

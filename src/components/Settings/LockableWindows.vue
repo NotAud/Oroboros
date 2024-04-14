@@ -43,11 +43,7 @@ onMounted(() => {
       v-model="settingsStore.settings.windowDetection"
       @click="settingsStore.populateLockableWindows"
     />
-    <div
-      v-if="settingsStore.settings.windowDetection"
-      ref="windowDetectionElement"
-      class="flex items-center"
-    >
+    <div ref="windowDetectionElement" class="flex items-center">
       <div class="flex h-full relative">
         <button
           class="rounded-md bg-white/5 py-0.5 hover:bg-white/10 transition-all shd w-[180px] whitespace-nowrap text-ellipsis overflow-x-hidden"

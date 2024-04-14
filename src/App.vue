@@ -14,11 +14,11 @@
         <SectionContainer title="Window Detection">
           <LockableWindows />
         </SectionContainer>
-        <SectionContainer title="Click Options" class="w-full">
+        <SectionContainer title="Press Type" class="w-full">
           <ClickOptions />
         </SectionContainer>
       </div>
-      <SectionContainer title="Click Repeat" class="w-full">
+      <SectionContainer title="Repeat Amount" class="w-full">
         <ClickRepeat />
       </SectionContainer>
     </div>

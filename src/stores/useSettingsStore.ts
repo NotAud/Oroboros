@@ -12,7 +12,7 @@ type Settings = {
     from: number;
     to: number;
   };
-  clickType: 0 | 1;
+  clickType: 0 | 1 | 2;
   clickRepeater: string;
   repeatAmount: number;
   hotkey: string[];
