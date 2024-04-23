@@ -15,3 +15,7 @@
 <p align="center">
   <img src="app-preview.png" width="350" alt="preview image">
 </p>
+
+### Support
+
+Only windows support
